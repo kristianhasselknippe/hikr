@@ -1,8 +1,4 @@
 <hikr.Page ux:Class="HomePage">
-	<Router ux:Dependency="router" />
-
-	<JavaScript File="HomePage.js" />
-
 	<DockPanel>
 		<hikr.Text FontSize="30" TextAlignment="Center" Dock="Top" Margin="0,50">Recent Hikes</hikr.Text>
 
@@ -10,7 +6,7 @@
 			<StackPanel>
 				<Rectangle ux:Class="Separator" Height="1" Fill="#fff4" />
 
-				<Each Items="{hikes}">
+				<Each Items="{hikes.hikes}">
 					<Separator />
 
 					<Panel HitTestMode="LocalBoundsAndChildren" Clicked="{goToHike}">

@@ -1,31 +1,24 @@
-var Context = require("Modules/Context");
+import DI from 'FuseJS/DI';
 
-var hike = this.Parameter;
+export default class EditHikePage {
+	constructor(hike, navigation = DI("navigation")) {
+		this.hike = Object.assign({},hike);
+		this.actualHike = hike;
+		this.navigation = navigation;
+	}
 
-var name = hike.map(function(x) { return x.name; });
-var location = hike.map(function(x) { return x.location; });
-var distance = hike.map(function(x) { return x.distance; });
-var rating = hike.map(function(x) { return x.rating; });
-var comments = hike.map(function(x) { return x.comments; });
+	cancel() {
+		this.navigation.goBack();
+	}
 
-function cancel() {
-	// Refresh hike value to reset dependent Observables' values
-	hike.value = hike.value;
-	router.goBack();
+	save() {
+		this.actualHike.update(
+			this.hike.name,
+			this.hike.location,
+			this.hike.distance,
+			this.hike.rating,
+			this.hike.comments
+		);
+		this.navigation.goBack();
+	}
 }
-
-function save() {
-	Context.updateHike(hike.value.id, name.value, location.value, distance.value, rating.value, comments.value);
-	router.goBack();
-}
-
-module.exports = {
-	name: name,
-	location: location,
-	distance: distance,
-	rating: rating,
-	comments: comments,
-
-	cancel: cancel,
-	save: save
-};

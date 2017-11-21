@@ -1,7 +1,11 @@
-function goToHomePage() {
-	router.goto("home");
-}
+import DI from 'FuseJS/DI';
 
-module.exports = {
-	goToHomePage: goToHomePage
-};
+export default class SplashPage {
+	constructor(navigation = DI("navigation")) {
+		this.navigation = navigation;
+	}
+	
+	goToHomePage() {
+		this.navigation.gotoHomePage();
+	}
+}

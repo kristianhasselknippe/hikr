@@ -1,12 +1,11 @@
-var Context = require("Modules/Context");
+import DI from 'FuseJS/DI';
 
-function goToHike(arg) {
-	var hike = arg.data;
-	router.push("editHike", hike);
+export default class HomePage {
+	constructor(navigation = DI("navigation")) {
+		this.navigation = navigation;
+	}
+	
+	goToHike(arg) {
+		this.navigation.pushEditHikePage(arg.data);
+	}	
 }
-
-module.exports = {
-	hikes: Context.hikes,
-
-	goToHike: goToHike
-};
